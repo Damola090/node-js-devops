@@ -1,0 +1,30 @@
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "3000:80"
+  node-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=kadara
+      - MONGO_PASSWORD=my123456
+      - SESSION_SECRET=secret
+    command: npm run dev
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=kadara
+      - MONGO_INITDB_ROOT_PASSWORD=my123456
+
+
+
+
+
+
+    
